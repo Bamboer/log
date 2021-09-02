@@ -1,4 +1,3 @@
-# log
 ```
 func NewLogger(logfile,LogLevel string)*log.Logger{
     var Logger *log.Logger
