@@ -31,7 +31,11 @@ const (
    Error
    Fatal
 )
+var Log *Logger
 
+func init(){
+	Log = New(os.Stdout,"",Ldate|Ltime|Lshortfile,0)
+}
 
 type Logger struct {
 	mu     sync.Mutex // ensures atomic writes; protects the following fields
