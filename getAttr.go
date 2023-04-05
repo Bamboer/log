@@ -28,11 +28,11 @@ func get(typ reflect.Type, val reflect.Value, fields string) (interface{}, error
 
 	switch typ.Kind() {
 	case reflect.Struct:
+	        if len(fields) == 0 {
+		        return val.Interface(), nil
+	        }
 		if newTyp, flag := typ.FieldByName(tmps[0]); flag {
 			if newTyp.IsExported() {
-	                        if len(fields) == 0 {
-		                     return val.Interface(), nil
-	                        }
 				return get(newTyp.Type, val.FieldByName(tmps[0]), strings.Join(tmps[1:], "."))
 			}
 			return nil, UnExported
