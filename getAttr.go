@@ -1,4 +1,17 @@
 package bamboer
+
+import (
+  "strings"
+  "fmt"
+  "reflect"
+)
+
+const(
+	NotFound := fmt.Errorf("not found field %s", fields)
+	PointerNil := fmt.Errorf("pointer is nil field %s", fields)
+	UnExported := fmt.Errorf("unexported field %s", fields)
+)
+
 // GetAttr get structs fields
 // judge the struct fields whether nil.
 func GetAttr(instance interface{}, fields string) (result interface{}, err error) {
@@ -13,9 +26,6 @@ func GetAttr(instance interface{}, fields string) (result interface{}, err error
 	return get(typ, val, fields)
 }
 func get(typ reflect.Type, val reflect.Value, fields string) (interface{}, error) {
-	NotFound := fmt.Errorf("not found field %s", fields)
-	PointerNil := fmt.Errorf("pointer is nil field %s", fields)
-	UnExported := fmt.Errorf("unexported field %s", fields)
 	tmps := strings.Split(fields, ".")
 
 	switch typ.Kind() {
